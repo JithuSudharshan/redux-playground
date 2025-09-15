@@ -1,20 +1,30 @@
 
 import { createStore } from "redux" 
 const ORDER_PIZZA = "order-pizza"
+const ORDER_BURGER = "order-burger"
 
-const action = {
+const pizzaOrder = {
     type:ORDER_PIZZA,
-    topping:["cherry","dryFruits","iceCream"]
 }
 
+const burgerOrder = {
+    type:ORDER_BURGER
+}
+
+
 //Action cerator
-function actionCreator(){
-    return action
+function orderPizza(){
+    return pizzaOrder
+}
+
+function orderBurger(){
+    return burgerOrder
 }
 
 //setting the initial state
 const initialState = {
-    pizzaBase:100
+    pizzaBase:100,
+    burger_Buns:200
 }
 
 //Reducer
@@ -25,7 +35,11 @@ const reducer =(state=initialState,action)=>{
                 ...state,
                 pizzaBase:state.pizzaBase-1
             }
-    
+        case  ORDER_BURGER:
+            return {
+                ...state,
+                burger_Buns:state.burger_Buns-1
+            }
         default: 
         return state
     }
@@ -42,15 +56,16 @@ console.log("Initial state : ",store.getState());
 const unsubscribe=store.subscribe(()=>(console.log("Updated state: ",store.getState())))
 
 //4- Allows state to be updated via Dispatch
-store.dispatch(actionCreator());
-store.dispatch(actionCreator());
-store.dispatch(actionCreator());
-store.dispatch(actionCreator());
-store.dispatch(actionCreator());
-store.dispatch(actionCreator());
-store.dispatch(actionCreator());
-store.dispatch(actionCreator());
+store.dispatch(orderPizza());
+store.dispatch(orderPizza());
+store.dispatch(orderPizza());
+store.dispatch(orderPizza());
+store.dispatch(orderPizza());
+store.dispatch(orderBurger());
+store.dispatch(orderBurger())
+store.dispatch(orderBurger())
+store.dispatch(orderBurger())
+store.dispatch(orderBurger());
 unsubscribe();
-store.dispatch(actionCreator());
 
 
