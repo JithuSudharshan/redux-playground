@@ -1,5 +1,5 @@
 
-import { createStore } from "redux" 
+import { createStore,combineReducers } from "redux" 
 const ORDER_PIZZA = "order-pizza"
 const ORDER_BURGER = "order-burger"
 
@@ -12,7 +12,7 @@ const burgerOrder = {
 }
 
 
-//Action cerator
+//Action cerators
 function orderPizza(){
     return pizzaOrder
 }
@@ -21,33 +21,52 @@ function orderBurger(){
     return burgerOrder
 }
 
-//setting the initial state
-const initialState = {
-    pizzaBase:100,
+//initial state for pizza
+const initialStatePizza = {
+    pizzaBase:100
+}
+
+//intial state for burger
+const initialStateBurger = {
     burger_Buns:200
 }
 
-//Reducer
-const reducer =(state=initialState,action)=>{
+//Reducer for pizza
+const PizzaReducer =(state=initialStatePizza,action)=>{
     switch (action.type) {
         case ORDER_PIZZA:
             return {
                 ...state,
                 pizzaBase:state.pizzaBase-1
             }
-        case  ORDER_BURGER:
+        default: 
+        return state
+    }
+}
+
+//Reducer for burger
+const BurgerReducer =(state=initialStateBurger,action)=>{
+    switch (action.type) {
+        case ORDER_PIZZA:
             return {
                 ...state,
-                burger_Buns:state.burger_Buns-1
+                pizzaBase:state.pizzaBase-1
             }
         default: 
         return state
     }
 }
 
+//combined reducer function exported from redux
+const rootReducer = combineReducers({
+    pizza:PizzaReducer,
+    burger:BurgerReducer
+});
+
 //Store
+
 //1- Store needs to hold Reducer Function
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 //2- its exposes an method called getSatte which gives you acess to the current state in the store
 console.log("Initial state : ",store.getState());
@@ -59,10 +78,6 @@ const unsubscribe=store.subscribe(()=>(console.log("Updated state: ",store.getSt
 store.dispatch(orderPizza());
 store.dispatch(orderPizza());
 store.dispatch(orderPizza());
-store.dispatch(orderPizza());
-store.dispatch(orderPizza());
-store.dispatch(orderBurger());
-store.dispatch(orderBurger())
 store.dispatch(orderBurger())
 store.dispatch(orderBurger())
 store.dispatch(orderBurger());
