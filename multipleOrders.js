@@ -47,10 +47,10 @@ const PizzaReducer =(state=initialStatePizza,action)=>{
 //Reducer for burger
 const BurgerReducer =(state=initialStateBurger,action)=>{
     switch (action.type) {
-        case ORDER_PIZZA:
+        case ORDER_BURGER:
             return {
                 ...state,
-                pizzaBase:state.pizzaBase-1
+                burger_Buns:state.burger_Buns-1
             }
         default: 
         return state
