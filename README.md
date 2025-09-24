@@ -28,8 +28,12 @@ This repository is intended for personal learning and experimentation with Redux
 ## 📝 Exercises Included
 - Basic Redux store setup
 - Actions and reducers examples
+- Combined reducers(root Reducer)
 - State updates and subscriptions
+- Logger Middleware
+- Thunk Middleware
 - Mini Redux projects to practice concepts
+  
 
 
 ---
